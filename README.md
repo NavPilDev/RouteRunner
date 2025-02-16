@@ -1,12 +1,4 @@
-# Codebender AI Chatbot Template
-
-This project is a template code to create a simple AI chatbot.
-
-It's a chat interface that allows you to talk with the Last Codebender.
-
-This project is built using Nextjs. It utilizes the OpenAI GPT4 for chat completion.
-
-<img src="app-screenshot.png" alt="app demo" width=600>
+# Route Runner
 
 ## Getting Started
 
