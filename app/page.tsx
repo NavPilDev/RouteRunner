@@ -7,7 +7,15 @@ export default function Home() {
   return (
     <main className="flex flex-col h-screen bg-[#040d17] text-white">
       <nav className="flex justify-between items-center p-4">
-        <Image src="/logo.png" alt="Codebender Logo" width={150} height={40} />
+        <div className="flex">
+          <Image
+            src="/logo.png"
+            alt="Codebender Logo"
+            width={100}
+            height={15}
+          />
+          <h1>ROUTE RUNNER</h1>
+        </div>
         <h1 className="text-xl font-semibold">
           Talk to <span className="highlighted-text">The Drone</span>
         </h1>

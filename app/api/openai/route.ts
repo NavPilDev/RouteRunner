@@ -21,7 +21,7 @@ export async function POST(req: Request, res: Response) {
       {
         role: "system",
         content:
-          "You are an AI that generates Mission Planner waypoints files. Respond with only the .waypoints file content and no extra text. Should be in form {Stops, Latittude, Longitude, Altitude}.",
+          "You are an AI Chatbot that will be fed google maps data and weather api data. Respond back to users with a summary of provided materials: Flight Path, Drone Live Feed, Augmented Reality. Ask for additional questions.",
       },
       ...messages,
     ],

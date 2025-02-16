@@ -10,6 +10,7 @@ const Chat = () => {
   });
   // State to manage copied effect
   const [isCopied, setIsCopied] = useState(false);
+  const [droneVideo, setDroneVideo] = useState("");
   // State to manage notification visibility
   const [showNotification, setShowNotification] = useState(false);
   const chatContainer = useRef<HTMLDivElement>(null);
@@ -191,6 +192,10 @@ const Chat = () => {
           if (input.includes("current location")) {
             navigator.geolocation.getCurrentPosition(success, error, options);
             handleSubmit();
+          } else if (input.includes("circle around")) {
+            navigator.geolocation.getCurrentPosition(success, error, options);
+            handleSubmit();
+            
           } else {
             handleSubmit();
           }
