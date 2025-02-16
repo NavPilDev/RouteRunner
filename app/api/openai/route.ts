@@ -21,12 +21,13 @@ export async function POST(req: Request, res: Response) {
       {
         role: "system",
         content:
-          "Create a flight path.",
+          "You are an AI that generates Mission Planner waypoints files. Respond with only the .waypoints file content and no extra text. Should be in form {Stops, Latittude, Longitude, Altitude}.",
       },
       ...messages,
     ],
     stream: true,
   });
+
 
   // Convert the response into a friendly text-stream
   const stream = OpenAIStream(response);
