@@ -1,9 +1,10 @@
 import { useChat } from "ai/react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Map } from "./map";
 import { cosineSimilarity } from "ai";
 const Chat = () => {
+  const [flightPath, setFlightPath] = useState<string[]>([]);
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     api: "/api/openai",
   });
@@ -43,6 +44,16 @@ const Chat = () => {
             <div style={{ width: "100%", marginLeft: "16px" }}>
               <p className="message">{m.content}</p>
               {m.role != "user" ? <Map /> : ""}
+              {m.role != "user" && flightPath.length > 1 ? (
+                <div>
+                  <h1>Flight Path</h1>
+                  {flightPath.map((line, index) => (
+                    <p id={String(index)}>{line}</p>
+                  ))}
+                </div>
+              ) : (
+                ""
+              )}
               {index < messages.length - 1 && (
                 <div className="horizontal-line" />
               )}
@@ -65,7 +76,7 @@ const Chat = () => {
     console.log(radius);
     const offsetLat = Number(radius) / 69;
     const offsetLon = Number(radius) / 54.6;
-    let flightPath = [
+    let fP = [
       {
         // Start
         latitude: pos.coords.latitude,
@@ -102,39 +113,24 @@ const Chat = () => {
         longitude: pos.coords.longitude,
       },
     ];
-    console.log(coords);
-    console.log(flightPath);
-    console.log(flightPath.length);
-    console.log("QGC WPL 110");
-    console.log("0	1	0	0	0	0	0	0	0	0	0	1");
-    for (let i = 0; i < flightPath.length; i++) {
-      console.log(i);
-
-      console.log(
-        i +
-          1 +
-          " " +
-          3 +
-          " " +
-          16 +
-          " " +
-          0 +
-          " " +
-          0 +
-          " " +
-          0 +
-          " " +
-          0 +
-          " " +
-          flightPath[i].latitude +
-          " " +
-          flightPath[i].longitude +
-          " " +
-          100 +
-          " " +
-          1
+    let fPSucessor = [];
+    fPSucessor.push("<?xml version='1.0' encoding='UTF-8' standalone='yes'?>");
+    fPSucessor.push("<mission>");
+    fPSucessor.push("\t<version value='2.3-pre8'/>");
+    fPSucessor.push(
+      `\t<mwp cx='${pos.coords.longitude}' cy='${pos.coords.latitude}' home-x='0' home-y='0' zoom='15'/>`
+    );
+    for (let i = 0; i < fP.length; i++) {
+      fPSucessor.push(
+        `\t<missionitem no="${i + 1}" action="WAYPOINT" lat="${
+          fP[i].latitude
+        }" lon=""${
+          fP[i].longitude
+        }" alt="100" parameter1="0" parameter2="0" parameter3="0" flag="0"/>`
       );
     }
+    fPSucessor.push("</mission>");
+    setFlightPath(fPSucessor);
   };
 
   const error = (err) => {
