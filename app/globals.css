@@ -206,3 +206,9 @@ h1 {
   gap: 10px;
   margin-left: auto;
 }
+
+.rasPI{
+  color: #ff8c8c;
+  padding: 10px;
+  outline: auto 1px ;
+}

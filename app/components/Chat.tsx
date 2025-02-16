@@ -66,36 +66,45 @@ const Chat = () => {
               <p className="message">{m.content}</p>
               {/* {m.role != "user" ? <Map /> : ""} */}
               {m.role != "user" && flightPath.length > 1 ? (
-                <button onClick={handleCopy} className="copyButton">
-                  <h1>Flight Path</h1>
-                  {flightPath.map((line, index) => (
-                    <p id={String(index)}>{line}</p>
-                  ))}
-                  <p className="copyText">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#b6b4b4"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <rect
-                        x="9"
-                        y="9"
-                        width="13"
-                        height="13"
-                        rx="2"
-                        ry="2"
-                      ></rect>
-                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                    {isCopied ? "Copied!" : "Copy Flight Path"}
-                  </p>
-                </button>
+                <>
+                  <button
+                    onClick={handleCopy}
+                    className="copyButton"
+                    type="button"
+                  >
+                    <h1>Flight Path</h1>
+                    {flightPath.map((line, index) => (
+                      <p id={String(index)}>{line}</p>
+                    ))}
+                    <p className="copyText">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#b6b4b4"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <rect
+                          x="9"
+                          y="9"
+                          width="13"
+                          height="13"
+                          rx="2"
+                          ry="2"
+                        ></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                      </svg>
+                      {isCopied ? "Copied!" : "Copy Flight Path"}
+                    </p>
+                  </button>
+                  <button className="rasPI" type="button">
+                    Send to RaspPi
+                  </button>
+                </>
               ) : (
                 ""
               )}
@@ -117,7 +126,7 @@ const Chat = () => {
 
   const success = (pos) => {
     const coords = pos.coords;
-    let radius = input.match(/(\d+)/)[1];
+    let radius = input.match(/(\d+)/)[0];
     console.log(radius);
     const offsetLat = Number(radius) / 69;
     const offsetLon = Number(radius) / 54.6;
@@ -195,7 +204,6 @@ const Chat = () => {
           } else if (input.includes("circle around")) {
             navigator.geolocation.getCurrentPosition(success, error, options);
             handleSubmit();
-            
           } else {
             handleSubmit();
           }
