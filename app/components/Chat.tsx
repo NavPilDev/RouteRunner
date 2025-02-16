@@ -14,7 +14,7 @@ const Chat = () => {
   // State to manage notification visibility
   const [showNotification, setShowNotification] = useState(false);
   const chatContainer = useRef<HTMLDivElement>(null);
-  const [setQRCode, QRCode] = useState("");
+  const [QRCode, setQRCode] = useState("");
   const scroll = () => {
     if (chatContainer.current) {
       const { offsetHeight, scrollHeight, scrollTop } = chatContainer.current;
@@ -104,12 +104,10 @@ const Chat = () => {
                   <button className="rasPI" type="button">
                     Send to RaspPi
                   </button>
+                  <div className="horizontal-line" />
                 </>
               ) : (
                 ""
-              )}
-              {index < messages.length - 1 && (
-                <div className="horizontal-line" />
               )}
               {m.role != "user" && droneVideo != "" ? (
                 <>
@@ -118,6 +116,16 @@ const Chat = () => {
                     <source src={droneVideo} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
+                  <div className="horizontal-line" />
+                </>
+              ) : (
+                ""
+              )}
+              {m.role != "user" && QRCode != "" ? (
+                <>
+                  <h1>Augmented Reality View (Drone Scan)</h1>
+                  <img className="ml-auto mr-auto" src={QRCode} alt="" />
+                  <div className="horizontal-line" />
                 </>
               ) : (
                 ""
@@ -212,13 +220,15 @@ const Chat = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          if (input.includes("current location")) {
+          if (input.toLowerCase().includes("current location")) {
             navigator.geolocation.getCurrentPosition(success, error, options);
             setDroneVideo("/DJI_0284.mp4");
+            setQRCode("/sovalQR.png");
             handleSubmit();
-          } else if (input.includes("circle around")) {
+          } else if (input.toLowerCase().includes("circle around")) {
             navigator.geolocation.getCurrentPosition(success, error, options);
             setDroneVideo(`/DJI_0179.MP4`);
+            setQRCode("/romanQR.png");
             handleSubmit();
           } else {
             handleSubmit();
