@@ -47,7 +47,7 @@ h1 {
 }
 
 .chat {
-  width: 700px;
+  width: 1700px;
   height: calc(100vh - 200px);
   margin: auto;
 }
@@ -90,7 +90,7 @@ h1 {
 .chat-line .avatar {
   width: 32px;
   border-radius: 4px;
-  box-shadow: #0000009e 0px 2px 10px;
+  box-shadow: #ffffff9e 0px 2px 10px;
 }
 
 .chat-line .message {
@@ -193,4 +193,16 @@ h1 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 0 10px #ffeb3b40;
+}
+
+.copyButton{
+  text-align: left;
+}
+.copyText {
+  text-align: right;
+  color: #b6b4b4;
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  margin-left: auto;
 }
