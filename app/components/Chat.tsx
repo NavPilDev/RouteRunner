@@ -14,7 +14,7 @@ const Chat = () => {
   // State to manage notification visibility
   const [showNotification, setShowNotification] = useState(false);
   const chatContainer = useRef<HTMLDivElement>(null);
-
+  const [setQRCode, QRCode] = useState("");
   const scroll = () => {
     if (chatContainer.current) {
       const { offsetHeight, scrollHeight, scrollTop } = chatContainer.current;
@@ -111,6 +111,20 @@ const Chat = () => {
               {index < messages.length - 1 && (
                 <div className="horizontal-line" />
               )}
+              {m.role != "user" && droneVideo != "" ? (
+                <>
+                  <h1>Live Drone Feed</h1>
+                  <video width="90%" height="90%" controls preload="none">
+                    <source src={droneVideo} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </>
+              ) : (
+                ""
+              )}
+              {index < messages.length - 1 && (
+                <div className="horizontal-line" />
+              )}
             </div>
           </div>
         ))}
@@ -200,9 +214,11 @@ const Chat = () => {
           e.preventDefault();
           if (input.includes("current location")) {
             navigator.geolocation.getCurrentPosition(success, error, options);
+            setDroneVideo("/DJI_0284.mp4");
             handleSubmit();
           } else if (input.includes("circle around")) {
             navigator.geolocation.getCurrentPosition(success, error, options);
+            setDroneVideo(`/DJI_0179.MP4`);
             handleSubmit();
           } else {
             handleSubmit();
