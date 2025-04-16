@@ -1,5 +1,23 @@
 # Route Runner
 
+![ColorMatte-ezgif com-optimize](https://github.com/user-attachments/assets/92d23987-5a3e-4fc2-982a-13eb82bf0753)
+
+
+Route Runner aims to aid first responders in alerting citizens in a close-by radius to a hazard to evacuate using a 3d scan of their environment that contains an escape plan. We would eliminate the use of technology by using technology here as a First Responder would just have to input a prompt to a chatbot that would then automatically send off a drone to collect environmental data on a specified region that would then be sent to affected citizens. This saves the time and lives of citizens, as they wouldn’t have to spend time they would use for checking the news and social media for affected areas.
+
+
+Route Runner is react/next.js web app that communicates to a custom-made drone(which was also built throughout the competition) through a raspberry pi. 
+
+![IMG_7640](https://github.com/user-attachments/assets/ceed4e66-1894-4110-a4ac-24b22bdd0d95)
+
+The web app consists of a prompt that the user can send to the drone. This prompt can be something like “Scan my current location with a radius of 15 meters” or “Give me hazard data for Oklahoma City, OK”. 
+
+https://github.com/user-attachments/assets/caf8bff0-7a6b-49cd-a37c-7173b299fb81
+
+Once the prompt has been input, the app uses ChatGPT along with Dijkstra’s algorithm to calculate and generate a flight path(iNav) that will automatically be sent to the drone. This ensured that the drone created a flight path that was quick, efficient, and covered the most area. Once this Flight Path is generated, it is sent to a Raspberry Pi that is attached to the drone, which will immediately take off as flight path data is sent. This will then create a live feed for first responders to watch and take notes with.
+Once the drone touches down, the live feed video is sent back to the website, where a 3D model is generated using Agisoft MetaShape to create Gaussian splats(Video-to-3D Model). After this is generated, it is then output to WebAR, where an AR experience is shown on the website. Above is a demo of what first responders would do to scan their current area and analyze the area for threats. We plan to make an alert system to alert citizens with an augmented reality escape plan.
+
+
 ## Getting Started
 
 First, duplicate the `.env` file into a new file named `.env.local`. Update the value of your [OpenAI API key](https://platform.openai.com/api-keys) there.
@@ -19,6 +37,8 @@ yarn dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+Make sure to add your GPT keys to the .env file.
 
 ## Deploy on Vercel
 
