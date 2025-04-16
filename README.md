@@ -10,12 +10,14 @@ Route Runner is react/next.js web app that communicates to a custom-made drone(w
 
 ![IMG_7640](https://github.com/user-attachments/assets/ceed4e66-1894-4110-a4ac-24b22bdd0d95)
 
-The web app consists of a prompt that the user can send to the drone. This prompt can be something like “Scan my current location with a radius of 15 meters” or “Give me hazard data for Oklahoma City, OK”. 
+We built a custom quadcopter with a F450 frame. For the flight controller and ESC, we used the SpeedyBee F405V3 50A stack and Flash Hobby D4215 650KV brushless motors. The construction of the quad-copter took about 2 hours and configuring it for the different missions ran throughout the night. We used a range of mission planning software, starting with Betaflight, moving to AdruPilot, and finally settling with iNAV. 
+
+The web app consists of a prompt the user can send to the drone. This prompt can be something like “Scan my current location with a radius of 15 meters” or “Give me hazard data for Oklahoma City, OK”. Once the prompt has been input, the app uses ChatGPT along with Dijkstra’s algorithm to calculate and generate a flight path(iNav) that will automatically be sent to the drone. This ensured that the drone created a flight path that was quick, efficient, and covered the most area. Once this Flight Path is generated, it is sent to a Raspberry Pi that is attached to the drone, which will immediately take off as flight path data is sent. This will then create a live feed for first responders to watch and take notes with.
 
 https://github.com/user-attachments/assets/caf8bff0-7a6b-49cd-a37c-7173b299fb81
 
-Once the prompt has been input, the app uses ChatGPT along with Dijkstra’s algorithm to calculate and generate a flight path(iNav) that will automatically be sent to the drone. This ensured that the drone created a flight path that was quick, efficient, and covered the most area. Once this Flight Path is generated, it is sent to a Raspberry Pi that is attached to the drone, which will immediately take off as flight path data is sent. This will then create a live feed for first responders to watch and take notes with.
 Once the drone touches down, the live feed video is sent back to the website, where a 3D model is generated using Agisoft MetaShape to create Gaussian splats(Video-to-3D Model). After this is generated, it is then output to WebAR, where an AR experience is shown on the website. Above is a demo of what first responders would do to scan their current area and analyze the area for threats. We plan to make an alert system to alert citizens with an augmented reality escape plan.
+
 
 
 ## Getting Started
