@@ -20,6 +20,8 @@ https://github.com/user-attachments/assets/caf8bff0-7a6b-49cd-a37c-7173b299fb81
 
 Once the drone touches down, the live feed video is sent back to the website, where a 3D model is generated using Agisoft MetaShape to create Gaussian splats(Video-to-3D Model). After this is generated, it is then output to WebAR, where an AR experience is shown on the website. Above is a demo of what first responders would do to scan their current area and analyze the area for threats. We plan to make an alert system to alert citizens with an augmented reality escape plan.
 
+https://github.com/user-attachments/assets/c0d63b8b-0493-45d2-b4c5-9ba91c98e09e
+
 ## Getting Started
 
 First, duplicate the `.env` file into a new file named `.env.local`. Update the value of your [OpenAI API key](https://platform.openai.com/api-keys) there.
